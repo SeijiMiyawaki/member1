@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listing Members</title>
+<link rel="stylesheet" href="/css/bootstrap.css" />
+<script src="/js/bootstrap.js"></script>
+</head>
+<body>
+	<div class="continer">
+		<h1>メンバーリスト</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>名前</th>
+					<th>年齢</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="member:${members}" th:object="${member}">
+					<td th:text="*{id}"></td>
+					<td th:text="*{name}"></td>
+					<td th:text="*{age}"></td>
+					<td><a class="btn btn-default btn-xs" th:href="@{/member/{id}/edit(id=*{id})}">編集</a></td>
+					<td><a class="btn btn-default btn-xs" th:href="@{/member/{id}(id=*{id})}">参照</a></td>
+					<td>
+						<form th:action="@{/member/{id}(id=*{id})}" th:method="post">
+							<input class="btn btn-default btn-xs" type="submit" value="削除" />
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<a class="btn btn-default" href="/member/new">新規作成</a>
+	</div>
+</body>
+</html>
